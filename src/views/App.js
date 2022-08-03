@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import About from './about/About';
@@ -11,24 +10,22 @@ import AddUser from './users/AddUser';
 import User from './users/User';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../auth';
 
-class App extends React.Component {
+const App = (props) => {
 
-  render() {
-    console.log("App(isLoggedIn): ", this.props.isLoggedIn);
-    return (
-      <BrowserRouter>
-        {this.props.isLoggedIn && <Header />}
-        < Switch >
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={userIsAuthenticated(About)} />
-          <Route path="/user" exact component={userIsAuthenticated(User)} />
-          <Route path="/user/new" component={userIsAuthenticated(AddUser)} />
-          <Route path="/login" component={userIsNotAuthenticated(Login)} />
-          <Route path="*" component={NotFound} />
-        </Switch >
-      </BrowserRouter >
-    );
-  }
+  return (
+    <BrowserRouter>
+      {props.isLoggedIn && <Header />}
+      < Switch >
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={userIsAuthenticated(About)} />
+        <Route path="/user" exact component={userIsAuthenticated(User)} />
+        <Route path="/user/new" component={userIsAuthenticated(AddUser)} />
+        <Route path="/login" component={userIsNotAuthenticated(Login)} />
+        <Route path="*" component={NotFound} />
+      </Switch >
+    </BrowserRouter >
+  );
+
 }
 
 const mapStateReduxToPropsOfApp = (state) => {
