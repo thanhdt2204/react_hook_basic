@@ -1,9 +1,11 @@
-import { withRouter } from "react-router";
+import { useHistory } from "react-router-dom";
 
-const NotFound = (props) => {
+const NotFound = () => {
+
+    const history = useHistory();
 
     const handleToHome = () => {
-        props.history.push("/");
+        history.push("/");
     }
 
     return (
@@ -15,4 +17,4 @@ const NotFound = (props) => {
 
 }
 
-export default withRouter(NotFound);
+export default NotFound;

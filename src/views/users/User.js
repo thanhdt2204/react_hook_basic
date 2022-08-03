@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { withRouter } from "react-router";
 import { toast, ToastContainer } from 'react-toastify';
 import userApi from '../../services/userService';
 import { message, pagination } from '../../utils/constant';
@@ -7,8 +6,11 @@ import DeleteUser from './DeleteUser';
 import ListUser from './ListUser';
 import UpdateUser from './UpdateUser';
 import './User.scss';
+import { useHistory } from "react-router-dom";
 
-const User = (props) => {
+const User = () => {
+
+    const history = useHistory();
 
     const [currentPage, setCurrentPage] = useState(0);
     const [email, setEmail] = useState('');
@@ -27,7 +29,7 @@ const User = (props) => {
     }, [currentPage]);
 
     const handleAddNew = () => {
-        props.history.push("/user/new");
+        history.push("/user/new");
     }
 
     const f_changePage = (pageNumber) => {
@@ -103,4 +105,4 @@ const User = (props) => {
 
 }
 
-export default withRouter(User);
+export default User;

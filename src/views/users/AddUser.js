@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import userApi from '../../services/userService';
 import { message } from '../../utils/constant';
 
-const AddUser = (props) => {
+const AddUser = () => {
+
+    const history = useHistory();
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -25,7 +26,7 @@ const AddUser = (props) => {
             } else if (response.status === 400) {
                 toast.warn(response.status + ': ' + response.message);
             } else {
-                props.history.push("/user");
+                history.push("/user");
             }
         });
     };
@@ -66,4 +67,4 @@ const AddUser = (props) => {
 
 }
 
-export default withRouter(AddUser);
+export default AddUser;

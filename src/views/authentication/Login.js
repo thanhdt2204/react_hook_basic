@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
 import userApi from '../../services/userService';
-import './Login.scss';
 import userAction from '../../store/actions/userAction';
-import { withRouter } from "react-router";
 import { message } from '../../utils/constant';
+import './Login.scss';
 
 const Login = (props) => {
 
+    const history = useHistory();
     const [email, setEmail] = useState('thanhdoan@gmail.com');
     const [password, setPassword] = useState('123456');
 
@@ -30,7 +31,7 @@ const Login = (props) => {
                     toast.warn(response.status + ': ' + response.message);
                 } else {
                     props.loginSuccess(response.data);
-                    props.history.push("/");
+                    history.push("/");
                 }
             });
     };
@@ -74,4 +75,4 @@ const mapDispatchReduxToPropsOfLogin = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchReduxToPropsOfLogin)(withRouter(Login));
+export default connect(null, mapDispatchReduxToPropsOfLogin)(Login);

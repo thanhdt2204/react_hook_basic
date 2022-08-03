@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
-import { withRouter } from "react-router";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import userAction from '../../store/actions/userAction';
 import './Header.scss';
 
 const Header = (props) => {
 
+    const history = useHistory();
+
     const handleLogout = (e) => {
         props.logoutSuccess();
-        props.history.push("/login");
+        history.push("/login");
     };
 
     return (
@@ -36,4 +37,4 @@ const mapDispatchReduxToPropsOfHeader = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchReduxToPropsOfHeader)(withRouter(Header));
+export default connect(null, mapDispatchReduxToPropsOfHeader)(Header);
