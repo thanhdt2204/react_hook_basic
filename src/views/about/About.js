@@ -1,15 +1,10 @@
-import React from 'react';
+const About = () => {
 
-class About extends React.Component {
-
-
-    render() {
-        return (
-            <div style={{ color: "white", textAlign: "center", marginTop: "260px", fontWeight: "bold" }}>
-                See you later !
-            </div>
-        );
-    }
+    return (
+        <div style={{ color: "white", textAlign: "center", marginTop: "260px", fontWeight: "bold" }}>
+            See you later !
+        </div>
+    );
 
 }
 
