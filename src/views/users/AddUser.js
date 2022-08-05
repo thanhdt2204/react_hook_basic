@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
+import UserContext from "../../context/UserContext";
 import userApi from '../../services/userService';
 import { message } from '../../utils/constant';
 
 const AddUser = () => {
 
     const history = useHistory();
+    const userContext = useContext(UserContext);
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -26,6 +28,7 @@ const AddUser = () => {
             } else if (response.status === 400) {
                 toast.warn(response.status + ': ' + response.message);
             } else {
+                userContext.setSaveSuccess(true);
                 history.push("/user");
             }
         });

@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { toast, ToastContainer } from 'react-toastify';
+import UserContext from "../../context/UserContext";
 import userApi from '../../services/userService';
 import { message, pagination } from '../../utils/constant';
 import DeleteUser from './DeleteUser';
 import ListUser from './ListUser';
 import UpdateUser from './UpdateUser';
 import './User.scss';
-import { useHistory } from "react-router-dom";
 
 const User = () => {
 
     const history = useHistory();
+    const userContext = useContext(UserContext);
 
     const [currentPage, setCurrentPage] = useState(0);
     const [email, setEmail] = useState('');
@@ -26,7 +28,11 @@ const User = () => {
 
     useEffect(() => {
         getAllUsers(currentPage);
-    }, [currentPage]);
+        if (userContext.isSaveSuccess) {
+            toast.success(message.SAVE_USER_SUCCESSFULLY);
+            userContext.setSaveSuccess(false);
+        }
+    }, [currentPage, userContext]);
 
     const handleAddNew = () => {
         history.push("/user/new");
