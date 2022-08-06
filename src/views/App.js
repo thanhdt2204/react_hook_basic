@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { userIsAuthenticated, userIsNotAuthenticated } from '../auth';
 import StoreContext from "../context/StoreContext";
 import UserContextProvider from '../context/UserContextProvider';
+import { AuthenticateRoute } from '../routes/AuthenticateRoute';
 import About from './about/About';
 import './App.scss';
 import Login from './authentication/Login';
@@ -22,10 +22,10 @@ const App = () => {
       <UserContextProvider>
         < Switch >
           <Route path="/" exact component={Home} />
-          <Route path="/about" component={userIsAuthenticated(About)} />
-          <Route path="/user" exact component={userIsAuthenticated(User)} />
-          <Route path="/user/new" component={userIsAuthenticated(AddUser)} />
-          <Route path="/login" component={userIsNotAuthenticated(Login)} />
+          <AuthenticateRoute path="/about" component={About} />
+          <AuthenticateRoute path="/user" exact component={User} />
+          <AuthenticateRoute path="/user/new" component={AddUser} />
+          <Route path="/login" component={Login} />
           <Route path="*" component={NotFound} />
         </Switch >
       </UserContextProvider>
