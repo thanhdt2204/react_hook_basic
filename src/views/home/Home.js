@@ -1,9 +1,12 @@
-import { connect } from 'react-redux';
+import { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import StoreContext from "../../context/StoreContext";
 
-const Home = (props) => {
+const Home = () => {
 
-    if (!props.isLoggedIn) {
+    const { state } = useContext(StoreContext);
+
+    if (!state.isLoggedIn) {
         return (
             <Redirect to="/login" />
         );
@@ -17,8 +20,4 @@ const Home = (props) => {
 
 }
 
-const mapStateReduxToPropsOfHome = (state) => {
-    return { isLoggedIn: state.isLoggedIn }
-}
-
-export default connect(mapStateReduxToPropsOfHome, null)(Home);
+export default Home;

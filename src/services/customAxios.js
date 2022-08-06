@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getEnv } from "../config/env";
+import { storage } from '../utils/constant';
 
 const instance = axios.create({
     baseURL: `${getEnv("HOST_API")}`,
@@ -23,10 +24,9 @@ instance.interceptors.response.use(
 );
 
 instance.interceptors.request.use(function (config) {
-    const item = JSON.parse(localStorage.getItem('persist:root'));
+    const item = JSON.parse(localStorage.getItem(storage.STORAGE_KEY));
     const token = item && item.token ? "Bearer " + item.token : "";
-    const newToken = token.replace('"', '');
-    config.headers.Authorization = newToken;
+    config.headers.Authorization = token;
     return config;
 });
 

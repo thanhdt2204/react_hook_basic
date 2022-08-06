@@ -1,14 +1,16 @@
-import { connect } from 'react-redux';
+import { useContext } from 'react';
 import { NavLink, useHistory } from "react-router-dom";
+import StoreContext from "../../context/StoreContext";
 import userAction from '../../store/actions/userAction';
 import './Header.scss';
 
-const Header = (props) => {
+const Header = () => {
 
     const history = useHistory();
+    const { dispatch } = useContext(StoreContext);
 
     const handleLogout = (e) => {
-        props.logoutSuccess();
+        dispatch(userAction.logoutSuccessAction());
         history.push("/login");
     };
 
@@ -31,10 +33,4 @@ const Header = (props) => {
 
 }
 
-const mapDispatchReduxToPropsOfHeader = (dispatch) => {
-    return {
-        logoutSuccess: () => dispatch(userAction.logoutSuccessAction())
-    }
-}
-
-export default connect(null, mapDispatchReduxToPropsOfHeader)(Header);
+export default Header;

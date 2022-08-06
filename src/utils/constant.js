@@ -13,3 +13,7 @@ export const message = {
     DELETE_USER_SUCCESSFULLY: 'DELETE_USER_SUCCESSFULLY',
     UPDATE_USER_SUCCESSFULLY: 'UPDATE_USER_SUCCESSFULLY'
 }
+
+export const storage = {
+    STORAGE_KEY: 'root'
+}
